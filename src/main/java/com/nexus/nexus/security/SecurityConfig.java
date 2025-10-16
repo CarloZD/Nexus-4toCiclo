@@ -33,12 +33,12 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .csrf(csrf -> csrf.disable()) // CSRF desactivado para permitir peticiones externas
-                .cors(cors -> {}) // ✅ Habilita CORS (necesario para conectar con React)
+                .cors(cors -> {}) // Habilita CORS (necesario para conectar con React)
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/api/auth/**").permitAll() // login/register públicos
                         .anyRequest().authenticated()
                 )
-                .httpBasic(httpBasic -> {}); // ✅ Usamos autenticación básica temporalmente
+                .httpBasic(httpBasic -> {}); // Usamos autenticación básica temporalmente
 
         return http.build();
     }

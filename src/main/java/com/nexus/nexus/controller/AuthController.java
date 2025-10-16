@@ -11,7 +11,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/auth")
-@CrossOrigin(origins = "http://localhost:5173") // Permite conexión con React (Vite)
+@CrossOrigin(origins = "http://localhost:5173")
 public class AuthController {
 
     @Autowired
@@ -20,7 +20,7 @@ public class AuthController {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    // 🔹 Registro de usuario
+    // Registro de usuario
     @PostMapping("/register")
     public Map<String, String> register(@RequestBody User user) {
         Optional<User> existingUser = userRepository.findByUsername(user.getUsername());
@@ -35,7 +35,7 @@ public class AuthController {
         return Map.of("message", "Registro exitoso");
     }
 
-    // 🔹 Inicio de sesión
+    // Inicio de sesión
     @PostMapping("/login")
     public Map<String, String> login(@RequestBody User user) {
         Optional<User> foundUser = userRepository.findByUsername(user.getUsername());
@@ -54,7 +54,7 @@ public class AuthController {
         return Map.of("message", "Inicio de sesión exitoso");
     }
 
-    // 🔹 Obtener todos los usuarios (solo para pruebas)
+    // Obtener todos los usuarios (solo para pruebas)
     @GetMapping("/users")
     public Iterable<User> getAllUsers() {
         return userRepository.findAll();
