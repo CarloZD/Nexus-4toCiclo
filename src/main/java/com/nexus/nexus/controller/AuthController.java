@@ -20,7 +20,7 @@ public class AuthController {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    // Registro de usuario
+    // Registro
     @PostMapping("/register")
     public Map<String, String> register(@RequestBody User user) {
         Optional<User> existingUser = userRepository.findByUsername(user.getUsername());
@@ -35,7 +35,7 @@ public class AuthController {
         return Map.of("message", "Registro exitoso");
     }
 
-    // Inicio de sesión
+    // Login
     @PostMapping("/login")
     public Map<String, String> login(@RequestBody User user) {
         Optional<User> foundUser = userRepository.findByUsername(user.getUsername());
@@ -46,7 +46,7 @@ public class AuthController {
 
         User u = foundUser.get();
 
-        // Comprobamos si la contraseña coincide
+        // Comprueba si la contraseña coincide
         if (!passwordEncoder.matches(user.getPassword(), u.getPassword())) {
             return Map.of("message", "Contraseña incorrecta");
         }
@@ -54,7 +54,7 @@ public class AuthController {
         return Map.of("message", "Inicio de sesión exitoso");
     }
 
-    // Obtener todos los usuarios (solo para pruebas)
+    // Obtener todos los usuarios
     @GetMapping("/users")
     public Iterable<User> getAllUsers() {
         return userRepository.findAll();
